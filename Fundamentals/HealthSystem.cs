@@ -6,6 +6,7 @@ namespace Fundamentals
     {
         public float CurrentHealth { get; private set; }
         public float MaxHealth { get; private set; }
+        public float Armor { get; set; } 
 
         public event Action OnDeath;
         public HealthSystem(float MaxHealth) 
@@ -15,7 +16,7 @@ namespace Fundamentals
         }
         public void TakeDamage(float damage)
         {
-            CurrentHealth -= damage;
+            CurrentHealth -= (damage - Armor);
             if (CurrentHealth <= 0)
             {
                 CurrentHealth = 0;
@@ -28,6 +29,9 @@ namespace Fundamentals
             if (CurrentHealth > MaxHealth)
             {
                 CurrentHealth = MaxHealth;
+            }
+            if (CurrentHealth <= 0) {
+                OnDeath?.Invoke();
             }
         }
     }
