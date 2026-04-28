@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Neon_Delivery
 {
-    internal class Class1
+    public interface IDamageable
     {
+        float CurrentHealth { get; }
+        void TakeDamage(float damage);
+        event System.Action onDeath;
     }
 }
